@@ -100,4 +100,56 @@ class Tlspdb_Admin {
 
 	}
 
+	/**
+	 * Register the admin menus
+	 *
+	 * @since    1.0.0
+	 */
+	public function add_admin_menus() {
+		$position   = 16;
+		$capability = 'manage_options';
+		$main_slug  = tlspdb_constants::main_menu_slug;
+
+
+		/*		$page_title = __('TimeLapse Slider', 'tlspdb');
+				$menu_title = $page_title;
+				$function   = array($this, 'tlspdb_main_slug_callback');
+
+				add_menu_page(
+					$page_title,
+					$menu_title,
+					$capability,
+					$main_slug,
+					$function,
+					'dashicons-location',
+					$position
+				);*/
+
+		//---------------------------------
+
+		$page_title = __("TimeLapse Slider", "tlspdb");
+		$menu_title = $page_title;
+		$slug       = $main_slug;
+		$function   = array($this, 'tlspdb_main_slug_callback');
+
+		add_submenu_page(
+			$main_slug,
+			$page_title,
+			$menu_title,
+			$capability,
+			$slug,
+			$function
+		);
+
+	}
+
+	function tlspdb_main_slug_callback() {
+		//handle data saving
+		if (!empty($_POST)) {
+
+			$msg = __('Data saved.', 'tlspdb');
+		}
+//		require_once plugin_dir_path(__FILE__) . 'partials/... .php';
+	}
+
 }
