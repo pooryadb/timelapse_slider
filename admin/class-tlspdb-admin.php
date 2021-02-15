@@ -27,7 +27,7 @@ class Tlspdb_Admin {
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $plugin_name    The ID of this plugin.
+	 * @var      string $plugin_name The ID of this plugin.
 	 */
 	private $plugin_name;
 
@@ -36,21 +36,22 @@ class Tlspdb_Admin {
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $version    The current version of this plugin.
+	 * @var      string $version The current version of this plugin.
 	 */
 	private $version;
 
 	/**
 	 * Initialize the class and set its properties.
 	 *
+	 * @param string $plugin_name The name of this plugin.
+	 * @param string $version     The version of this plugin.
+	 *
 	 * @since    1.0.0
-	 * @param      string    $plugin_name       The name of this plugin.
-	 * @param      string    $version    The version of this plugin.
 	 */
-	public function __construct( $plugin_name, $version ) {
+	public function __construct($plugin_name, $version) {
 
 		$this->plugin_name = $plugin_name;
-		$this->version = $version;
+		$this->version     = $version;
 
 	}
 
@@ -73,7 +74,7 @@ class Tlspdb_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/tlspdb-admin.css', array(), $this->version, 'all' );
+		wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/tlspdb-admin.css', array(), $this->version, 'all');
 
 	}
 
@@ -96,60 +97,42 @@ class Tlspdb_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/tlspdb-admin.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/tlspdb-admin.js', array('jquery'), $this->version, false);
 
 	}
 
 	/**
-	 * Register the admin menus
+	 * Register the timeLapse post_type
 	 *
 	 * @since    1.0.0
 	 */
-	public function add_admin_menus() {
-		$position   = 16;
-		$capability = 'manage_options';
-		$main_slug  = tlspdb_constants::main_menu_slug;
+	public function tlspdb_timeLapse_post_type() {
 
-
-		/*		$page_title = __('TimeLapse Slider', 'tlspdb');
-				$menu_title = $page_title;
-				$function   = array($this, 'tlspdb_main_slug_callback');
-
-				add_menu_page(
-					$page_title,
-					$menu_title,
-					$capability,
-					$main_slug,
-					$function,
-					'dashicons-location',
-					$position
-				);*/
-
-		//---------------------------------
-
-		$page_title = __("TimeLapse Slider", "tlspdb");
-		$menu_title = $page_title;
-		$slug       = $main_slug;
-		$function   = array($this, 'tlspdb_main_slug_callback');
-
-		add_submenu_page(
-			$main_slug,
-			$page_title,
-			$menu_title,
-			$capability,
-			$slug,
-			$function
+		$labels = array(
+			'name'               => _x('TimeLapse', 'post type general name', 'tlspdb'),
+			'singular_name'      => _x('TimeLapse', 'post type singular name', 'tlspdb'),
+			'add_new'            => _x('Add New', 'book', 'tlspdb'),
+			'add_new_item'       => __('Add New TimeLapse', 'tlspdb'),
+			'edit_item'          => __('Edit TimeLapse', 'tlspdb'),
+			'new_item'           => __('New TimeLapse', 'tlspdb'),
+			'all_items'          => __('All TimeLapse', 'tlspdb'),
+			'view_item'          => __('View TimeLapse', 'tlspdb'),
+			'search_items'       => __('Search TimeLapse', 'tlspdb'),
+			'not_found'          => __('No TimeLapse found', 'tlspdb'),
+			'not_found_in_trash' => __('No TimeLapse found in the Trash', 'tlspdb'),
+			'parent_item_colon'  => ’,
+		);
+		$args   = array(
+			'labels'        => $labels,
+			'description'   => __('Holds our TimeLapse slider data', 'tlspdb'),
+			'public'        => true,
+			'menu_position' => 5,
+			'supports'      => array('title'),
+			'menu_icon'     => 'dashicons-slides',
+			'has_archive'   => false,
 		);
 
-	}
-
-	function tlspdb_main_slug_callback() {
-		//handle data saving
-		if (!empty($_POST)) {
-
-			$msg = __('Data saved.', 'tlspdb');
-		}
-//		require_once plugin_dir_path(__FILE__) . 'partials/... .php';
+		register_post_type('TimeLapse', $args);
 	}
 
 }
