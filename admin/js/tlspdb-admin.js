@@ -3,7 +3,7 @@
     $(window).load(function () {
 
         // on upload button click
-        $('body').on('click', '.misha-upl', function (e) {
+        $('body').on('click', '.upload-tlspdb', function (e) {
 
             e.preventDefault();
 
@@ -27,22 +27,23 @@
                     var imgHtml = '<img src="' + attachment[0].sizes.thumbnail.url + '">'
                     if (attachmentSize > 1) {
                         imgHtml += ' ... ... > ' +
-                            '<img src="' + attachment[attachmentSize-1].sizes.thumbnail.url + '">'
+                            '<img src="' + attachment[attachmentSize - 1].sizes.thumbnail.url + '">' +
+                            'click to replace'
                     }
 
                     button.html(imgHtml).show();
-                    $('input[name=misha-img]').val(attachment.map(value => value.id));
+                    $('input[name=img-tlspdb]').val(attachment.map(value => value.id));
 
                 }).open();
 
-            custom_uploader.on('open',function() {
+            custom_uploader.on('open', function () {
                 var selection = custom_uploader.state().get('selection');
-                var ids_value = jQuery('input[name=misha-img]').val();
+                var ids_value = jQuery('input[name=img-tlspdb]').val();
 
-                if(ids_value.length > 0) {
+                if (ids_value.length > 0) {
                     var ids = ids_value.split(',');
 
-                    ids.forEach(function(id) {
+                    ids.forEach(function (id) {
                         var attachment = wp.media.attachment(id);
                         attachment.fetch();
                         selection.add(attachment ? [attachment] : []);

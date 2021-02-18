@@ -190,15 +190,15 @@ class Tlspdb_Admin {
 				$image_0 = wp_get_attachment_image_src($image_ids[0], 'thumbnail', true);
 				$image_1 = wp_get_attachment_image_src($image_ids[sizeof($image_ids) - 1], 'thumbnail', true);
 				echo '
-<a href="#" class="misha-upl">
-	<img src="' . $image_0[0] . '" /> ... ... > <img src="' . $image_1[0] . '" />
+<a href="#" class="upload-tlspdb">
+	<img src="' . $image_0[0] . '" /> ... ... > <img src="' . $image_1[0] . '" /> click to replace
 </a>
-	      <input type="hidden" name="misha-img" value="' . implode(',', $image_ids) . '">';
+	      <input type="hidden" name="img-tlspdb" value="' . implode(',', $image_ids) . '">';
 
 			} else {
 
-				echo '<a href="#" class="misha-upl">Upload image</a>
-	      <input type="hidden" name="misha-img" value="">';
+				echo '<a href="#" class="upload-tlspdb">Select/Upload image</a>
+	      <input type="hidden" name="img-tlspdb" value="">';
 
 			}
 		}// product_price_box_content()
@@ -227,7 +227,7 @@ class Tlspdb_Admin {
 			}
 		}
 
-		$imgIds = isset($_POST['misha-img']) ? $_POST['misha-img'] : '';
+		$imgIds = isset($_POST['img-tlspdb']) ? $_POST['img-tlspdb'] : '';
 		update_post_meta($post_id, tlspdb_constants::timelapse_box_image_ids_option, $imgIds);
 	}
 }
