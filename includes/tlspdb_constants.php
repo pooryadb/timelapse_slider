@@ -9,5 +9,6 @@ abstract class tlspdb_constants {
 
 	const slider_shortCode_name = 'tls-slider';
 
+	const box_select_images_id = 'select_images_box';
 	const box_slider_shortCode_id = 'slider_shortCode_box';
 }

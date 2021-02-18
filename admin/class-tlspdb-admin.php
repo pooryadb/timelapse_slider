@@ -131,7 +131,7 @@ class Tlspdb_Admin {
 			'description'   => __('Holds our TimeLapse slider data', 'tlspdb'),
 			'public'        => true,
 			'menu_position' => 5,
-			'supports'      => array('title', 'product_price_box'),
+			'supports'      => array('title', tlspdb_constants::box_select_images_id),
 			'menu_icon'     => 'dashicons-slides',
 			'has_archive'   => false,
 		);
@@ -172,15 +172,15 @@ class Tlspdb_Admin {
 
 	public function tlspdb_timeLapse_box() {
 		add_meta_box(
-			'product_price_box',
-			__('Product Price', 'tlspdb'),
-			'product_price_box_content',
+			tlspdb_constants::box_select_images_id,
+			__('Select Images', 'tlspdb'),
+			'slect_images_box_content',
 			tlspdb_constants::timelapse_post_type,
 			'normal',
 			'core'
 		);
 
-		function product_price_box_content($post) {
+		function slect_images_box_content($post) {
 			$image_ids = get_post_meta($post->ID, tlspdb_constants::timelapse_box_image_ids_option, true);
 			$image_ids = explode(',', $image_ids);
 
