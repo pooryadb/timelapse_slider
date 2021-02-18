@@ -181,8 +181,8 @@ class Tlspdb_Admin {
 		);
 
 		function product_price_box_content($post) {
-			$image_ids = get_post_meta($post->ID, tlspdb_constants::timelapse_box_image_ids_option,true);
-			$image_ids = explode(',',$image_ids);
+			$image_ids = get_post_meta($post->ID, tlspdb_constants::timelapse_box_image_ids_option, true);
+			$image_ids = explode(',', $image_ids);
 
 			wp_nonce_field('somerandomstr', tlspdb_constants::timelapse_box_nounce);
 
@@ -229,5 +229,27 @@ class Tlspdb_Admin {
 
 		$imgIds = isset($_POST['img-tlspdb']) ? $_POST['img-tlspdb'] : '';
 		update_post_meta($post_id, tlspdb_constants::timelapse_box_image_ids_option, $imgIds);
+	}
+
+	public function tlspdb_slider_shortcode_box() {
+		add_meta_box(
+			tlspdb_constants::box_slider_shortCode_id,
+			__('Slider ShortCode', 'tlspdb'),
+			'slider_shortcode_box_content',
+			tlspdb_constants::timelapse_post_type,
+			'side',
+			'high'
+		);
+
+		function slider_shortcode_box_content($post) {
+			$msg           = __('To use this TimeLapseSlider copy & paste below shortCode where ever you need', 'tlspdb');
+			$shortCodeName = tlspdb_constants::slider_shortCode_name;
+			$id            = $post->ID;
+
+			echo "<p>$msg</p>";
+			echo "<code>[$shortCodeName id=$id]</code>";
+
+		}// slider_shortcode_box_content()
+
 	}
 }

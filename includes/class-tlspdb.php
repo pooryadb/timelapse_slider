@@ -161,6 +161,8 @@ class Tlspdb {
 		$this->loader->add_filter('post_updated_messages', $plugin_admin, 'tlspdb_timeLapse_messages');
 		$this->loader->add_action('add_meta_boxes', $plugin_admin, 'tlspdb_timeLapse_box');
 		$this->loader->add_action('save_post', $plugin_admin, 'tlspdb_timeLapse_box_save');
+
+		$this->loader->add_action('add_meta_boxes', $plugin_admin, 'tlspdb_slider_shortcode_box');
 	}
 
 	/**

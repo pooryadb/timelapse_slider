@@ -8,4 +8,6 @@ abstract class tlspdb_constants {
 	const timelapse_box_image_ids_option = 'tls_image_ids';
 
 	const slider_shortCode_name = 'tls-slider';
+
+	const box_slider_shortCode_id = 'slider_shortCode_box';
 }
