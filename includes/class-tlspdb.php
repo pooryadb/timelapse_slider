@@ -35,7 +35,7 @@ class Tlspdb {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      Tlspdb_Loader    $loader    Maintains and registers all hooks for the plugin.
+	 * @var      Tlspdb_Loader $loader Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
 
@@ -44,7 +44,7 @@ class Tlspdb {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      string    $plugin_name    The string used to uniquely identify this plugin.
+	 * @var      string $plugin_name The string used to uniquely identify this plugin.
 	 */
 	protected $plugin_name;
 
@@ -53,7 +53,7 @@ class Tlspdb {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      string    $version    The current version of the plugin.
+	 * @var      string $version The current version of the plugin.
 	 */
 	protected $version;
 
@@ -67,7 +67,7 @@ class Tlspdb {
 	 * @since    1.0.0
 	 */
 	public function __construct() {
-		if ( defined( 'TLSPDB_VERSION' ) ) {
+		if (defined('TLSPDB_VERSION')) {
 			$this->version = TLSPDB_VERSION;
 		} else {
 			$this->version = '1.0.0';
@@ -103,24 +103,24 @@ class Tlspdb {
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-tlspdb-loader.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-tlspdb-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-tlspdb-i18n.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-tlspdb-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-tlspdb-admin.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-tlspdb-admin.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-tlspdb-public.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-tlspdb-public.php';
 
 		$this->loader = new Tlspdb_Loader();
 
@@ -139,7 +139,7 @@ class Tlspdb {
 
 		$plugin_i18n = new Tlspdb_i18n();
 
-		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
+		$this->loader->add_action('plugins_loaded', $plugin_i18n, 'load_plugin_textdomain');
 
 	}
 
@@ -152,14 +152,36 @@ class Tlspdb {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new Tlspdb_Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin = new Tlspdb_Admin($this->get_plugin_name(), $this->get_version());
 
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-
-		$this->loader->add_action('admin_menu', $plugin_admin, 'add_admin_menus');
+		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
+		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
 
 		$this->loader->add_action('init', $plugin_admin, 'tlspdb_timeLapse_post_type');
+		$this->loader->add_filter('post_updated_messages', $plugin_admin, 'tlspdb_timeLapse_messages');
+		$this->loader->add_action('add_meta_boxes', $plugin_admin, 'tlspdb_timeLapse_box');
+		$this->loader->add_action('save_post', $plugin_admin, 'tlspdb_timeLapse_box_save');
+	}
+
+	/**
+	 * The name of the plugin used to uniquely identify it within the context of
+	 * WordPress and to define internationalization functionality.
+	 *
+	 * @return    string    The name of the plugin.
+	 * @since     1.0.0
+	 */
+	public function get_plugin_name() {
+		return $this->plugin_name;
+	}
+
+	/**
+	 * Retrieve the version number of the plugin.
+	 *
+	 * @return    string    The version number of the plugin.
+	 * @since     1.0.0
+	 */
+	public function get_version() {
+		return $this->version;
 	}
 
 	/**
@@ -171,10 +193,10 @@ class Tlspdb {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new Tlspdb_Public( $this->get_plugin_name(), $this->get_version() );
+		$plugin_public = new Tlspdb_Public($this->get_plugin_name(), $this->get_version());
 
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+		$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
+		$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
 
 	}
 
@@ -188,34 +210,13 @@ class Tlspdb {
 	}
 
 	/**
-	 * The name of the plugin used to uniquely identify it within the context of
-	 * WordPress and to define internationalization functionality.
-	 *
-	 * @since     1.0.0
-	 * @return    string    The name of the plugin.
-	 */
-	public function get_plugin_name() {
-		return $this->plugin_name;
-	}
-
-	/**
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
-	 * @since     1.0.0
 	 * @return    Tlspdb_Loader    Orchestrates the hooks of the plugin.
+	 * @since     1.0.0
 	 */
 	public function get_loader() {
 		return $this->loader;
-	}
-
-	/**
-	 * Retrieve the version number of the plugin.
-	 *
-	 * @since     1.0.0
-	 * @return    string    The version number of the plugin.
-	 */
-	public function get_version() {
-		return $this->version;
 	}
 
 }

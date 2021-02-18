@@ -97,6 +97,10 @@ class Tlspdb_Admin {
 		 * class.
 		 */
 
+		if (!did_action('wp_enqueue_media')) {
+			wp_enqueue_media();
+		}
+
 		wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/tlspdb-admin.js', array('jquery'), $this->version, false);
 
 	}
@@ -120,19 +124,110 @@ class Tlspdb_Admin {
 			'search_items'       => __('Search TimeLapse', 'tlspdb'),
 			'not_found'          => __('No TimeLapse found', 'tlspdb'),
 			'not_found_in_trash' => __('No TimeLapse found in the Trash', 'tlspdb'),
-			'parent_item_colon'  => ’,
+			'parent_item_colon'  => '’',
 		);
 		$args   = array(
 			'labels'        => $labels,
 			'description'   => __('Holds our TimeLapse slider data', 'tlspdb'),
 			'public'        => true,
 			'menu_position' => 5,
-			'supports'      => array('title'),
+			'supports'      => array('title', 'product_price_box'),
 			'menu_icon'     => 'dashicons-slides',
 			'has_archive'   => false,
 		);
 
-		register_post_type('TimeLapse', $args);
+		register_post_type(tlspdb_constants::timelapse_post_type, $args);
 	}
 
+	public function tlspdb_timeLapse_messages($messages) {
+		global $post, $post_ID;
+		$messages[tlspdb_constants::timelapse_post_type] = array(
+			0  => '’',
+			1  => sprintf(__('Product updated. <a href="%s">View product</a>'), esc_url(get_permalink($post_ID))),
+			2  => __('Custom field updated.', 'tlspdb'),
+			3  => __('Custom field deleted.', 'tlspdb'),
+			4  => __('Product updated.', 'tlspdb'),
+			5  => isset($_GET['revision']) ? sprintf(
+				__('Product restored to revision from %s', 'tlspdb'),
+				wp_post_revision_title((int)$_GET['revision'], false)
+			) : false,
+			6  => sprintf(__('Product published. <a href="%s">View product</a>', 'tlspdb'), esc_url(get_permalink($post_ID))),
+			7  => __('Product saved.', 'tlspdb'),
+			8  => sprintf(
+				__('Product submitted. <a target="_blank" href="%s">Preview product</a>', 'tlspdb'),
+				esc_url(add_query_arg('preview', 'true', get_permalink($post_ID)))
+			),
+			9  => sprintf(
+				__('Product scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview product</a>', 'tlspdb'),
+				date_i18n(__('M j, Y @ G:i'), strtotime($post->post_date)),
+				esc_url(get_permalink($post_ID))
+			),
+			10 => sprintf(
+				__('Product draft updated. <a target="_blank" href="%s">Preview product</a>', 'tlspdb'),
+				esc_url(add_query_arg('preview', 'true', get_permalink($post_ID)))
+			),
+		);
+		return $messages;
+	}
+
+	public function tlspdb_timeLapse_box() {
+		add_meta_box(
+			'product_price_box',
+			__('Product Price', 'tlspdb'),
+			'product_price_box_content',
+			tlspdb_constants::timelapse_post_type,
+			'normal',
+			'core'
+		);
+
+		function product_price_box_content($post) {
+			$image_ids = get_post_meta($post->ID, tlspdb_constants::timelapse_box_image_ids_option,true);
+			$image_ids = explode(',',$image_ids);
+
+			wp_nonce_field('somerandomstr', tlspdb_constants::timelapse_box_nounce);
+
+			if (sizeof($image_ids) > 0) {
+				$image_0 = wp_get_attachment_image_src($image_ids[0], 'thumbnail', true);
+				$image_1 = wp_get_attachment_image_src($image_ids[sizeof($image_ids) - 1], 'thumbnail', true);
+				echo '
+<a href="#" class="misha-upl">
+	<img src="' . $image_0[0] . '" /> ... ... > <img src="' . $image_1[0] . '" />
+</a>
+	      <input type="hidden" name="misha-img" value="' . implode(',', $image_ids) . '">';
+
+			} else {
+
+				echo '<a href="#" class="misha-upl">Upload image</a>
+	      <input type="hidden" name="misha-img" value="">';
+
+			}
+		}// product_price_box_content()
+
+	}
+
+	public function tlspdb_timeLapse_box_save($post_id) {
+		if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+			return;
+		}
+
+		if (isset($_POST[tlspdb_constants::timelapse_box_nounce]) && wp_verify_nonce(
+				$_POST[tlspdb_constants::timelapse_box_nounce],
+				plugin_basename(__FILE__)
+			) !== false) {
+			return;
+		}
+
+		if (isset($_POST['post_type']) && 'page' == $_POST['post_type']) {
+			if (!current_user_can('edit_page', $post_id)) {
+				return;
+			}
+		} else {
+			if (!current_user_can('edit_post', $post_id)) {
+				return;
+			}
+		}
+
+		$imgIds = isset($_POST['misha-img']) ? $_POST['misha-img'] : '';
+		update_post_meta($post_id, tlspdb_constants::timelapse_box_image_ids_option, $imgIds);
+	}
 }
