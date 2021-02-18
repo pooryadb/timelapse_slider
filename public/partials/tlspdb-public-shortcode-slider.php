@@ -14,3 +14,5 @@
 ?>
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
+
+<a href="#aaa"><?php echo var_export($attr, true); ?></a>
