@@ -181,26 +181,27 @@ class Tlspdb_Admin {
 		);
 
 		function slect_images_box_content($post) {
-			$image_ids = get_post_meta($post->ID, tlspdb_constants::timelapse_box_image_ids_option, true);
-			$image_ids = explode(',', $image_ids);
+			$image_ids      = get_post_meta($post->ID, tlspdb_constants::timelapse_box_image_ids_option, true);
+			$image_ids      = explode(',', $image_ids);
+			$image_ids_size = sizeof($image_ids);
 
 			wp_nonce_field('somerandomstr', tlspdb_constants::timelapse_box_nounce);
 
-			if (sizeof($image_ids) > 0) {
+			$html = "<div class='select_image_tlspdb'>";
+			if ($image_ids_size > 0) {
 				$image_0 = wp_get_attachment_image_src($image_ids[0], 'thumbnail', true);
-				$image_1 = wp_get_attachment_image_src($image_ids[sizeof($image_ids) - 1], 'thumbnail', true);
-				echo '
-<a href="#" class="upload-tlspdb">
-	<img src="' . $image_0[0] . '" /> ... ... > <img src="' . $image_1[0] . '" /> click to replace
-</a>
-	      <input type="hidden" name="img-tlspdb" value="' . implode(',', $image_ids) . '">';
-
+				$image_1 = wp_get_attachment_image_src($image_ids[$image_ids_size - 1], 'thumbnail', true);
+				$html    .= "<p id='img_row_tlspdb'><img src='$image_0[0]' id='img_1_tlspdb'> ... ... ><img src='$image_1[0]' id='img_2_tlspdb'> (<code id='img_count_tlspdb'>$image_ids_size</code> image(s) selected)</p>";
+				$html    .= '<input type="hidden" name="img-ids-tlspdb" value="' . implode(',', $image_ids) . '">';
 			} else {
-
-				echo '<a href="#" class="upload-tlspdb">Select/Upload image</a>
-	      <input type="hidden" name="img-tlspdb" value="">';
+				$html .= "<p id='img_row_tlspsb' style='display: none;'><img src='' id='img_1_tlspdb'> ... ... ><img src='' id='img_2_tlspdb'> (<span id='img_count_tlspdb'></span> image(s) selected)</p>";
+				$html .= '<input type="hidden" name="img-ids-tlspdb" value="">';
 
 			}
+			$html .= '<a href="#" class="upload-tlspdb">Select/Upload image</a>';
+			$html .= "</div>";
+
+			echo $html;
 		}// product_price_box_content()
 
 	}

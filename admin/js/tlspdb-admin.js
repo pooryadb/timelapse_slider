@@ -12,7 +12,6 @@
                     title: 'Insert image',
                     library: {
                         // uploadedTo : wp.media.view.settings.post.id, // attach to the current post?
-                        uploadedTo: 'timelapse',
                         type: 'image'
                     },
                     button: {
@@ -22,17 +21,23 @@
                 }).on('select', function () { // it also has "open" and "close" events
                     var attachment = custom_uploader.state().get('selection').toJSON(),
                         attachmentSize = attachment.length;
-                    // console.log("selection: ", attachment)
 
-                    var imgHtml = '<img src="' + attachment[0].sizes.thumbnail.url + '">'
-                    if (attachmentSize > 1) {
-                        imgHtml += ' ... ... > ' +
-                            '<img src="' + attachment[attachmentSize - 1].sizes.thumbnail.url + '">' +
-                            'click to replace'
-                    }
+                    attachment = attachment.sort(function (a, b) {
+                        return (Number((a.title.match(/(\d+)/g)[0])) - Number(b.title.match(/(\d+)/g)[0]));
+                    });
 
-                    button.html(imgHtml).show();
-                    $('input[name=img-tlspdb]').val(attachment.map(value => value.id));
+                    var div = $(".select_image_tlspdb"),
+                        imageRow = div.find("#img_row_tlspdb"),
+                        img1 = imageRow.find("#img_1_tlspdb"),
+                        img2 = imageRow.find("#img_2_tlspdb"),
+                        imgCount = imageRow.find("#img_count_tlspdb"),
+                        input = div.find('input[name=img-ids-tlspdb]');
+
+                    imageRow.show();
+                    img1.attr("src", attachment[0].sizes.thumbnail.url);
+                    img2.attr("src", attachment[attachmentSize - 1].sizes.thumbnail.url);
+                    imgCount.html(attachmentSize);
+                    input.val(attachment.map(value => value.id));
 
                 }).open();
 
