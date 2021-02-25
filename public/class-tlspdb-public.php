@@ -27,7 +27,7 @@ class Tlspdb_Public {
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $plugin_name    The ID of this plugin.
+	 * @var      string $plugin_name The ID of this plugin.
 	 */
 	private $plugin_name;
 
@@ -36,21 +36,22 @@ class Tlspdb_Public {
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $version    The current version of this plugin.
+	 * @var      string $version The current version of this plugin.
 	 */
 	private $version;
 
 	/**
 	 * Initialize the class and set its properties.
 	 *
+	 * @param string $plugin_name The name of the plugin.
+	 * @param string $version     The version of this plugin.
+	 *
 	 * @since    1.0.0
-	 * @param      string    $plugin_name       The name of the plugin.
-	 * @param      string    $version    The version of this plugin.
 	 */
-	public function __construct( $plugin_name, $version ) {
+	public function __construct($plugin_name, $version) {
 
 		$this->plugin_name = $plugin_name;
-		$this->version = $version;
+		$this->version     = $version;
 
 	}
 
@@ -73,7 +74,29 @@ class Tlspdb_Public {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/tlspdb-public.css', array(), $this->version, 'all' );
+		wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/tlspdb-public.css', array(), $this->version, 'all');
+		wp_enqueue_style(
+			$this->plugin_name . "-owl.carousel",
+			plugin_dir_url(__FILE__) . 'css/owlCarousel/owl.carousel.css',
+			array(),
+			$this->version,
+			'all'
+		);
+
+		wp_enqueue_style(
+			$this->plugin_name . "-jquery-ui.theme",
+			plugin_dir_url(__FILE__) . 'css/jquery-ui/jquery-ui.theme.css',
+			array(),
+			$this->version,
+			'all'
+		);
+		wp_enqueue_style(
+			$this->plugin_name . "-jquery.ui.slider-rtl",
+			plugin_dir_url(__FILE__) . 'css/jquery-ui/jquery.ui.slider-rtl.css',
+			array(),
+			$this->version,
+			'all'
+		);
 
 	}
 
@@ -96,7 +119,36 @@ class Tlspdb_Public {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/tlspdb-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/tlspdb-public.js', array('jquery'), $this->version, false);
+		wp_enqueue_script(
+			$this->plugin_name . "-owl.carousel",
+			plugin_dir_url(__FILE__) . 'js/owlCarousel/owl.carousel.js',
+			array('jquery'),
+			$this->version,
+			false
+		);
+		wp_enqueue_script(
+			$this->plugin_name . "-owl.lazyload",
+			plugin_dir_url(__FILE__) . 'js/owlCarousel/owl.lazyload.js',
+			array('jquery'),
+			$this->version,
+			false
+		);
+
+		wp_enqueue_script(
+			$this->plugin_name . "-jquery-ui",
+			plugin_dir_url(__FILE__) . 'js/jquery-ui/jquery-ui.js',
+			array('jquery'),
+			$this->version,
+			false
+		);
+		wp_enqueue_script(
+			$this->plugin_name . "-jquery.ui.slider-rtl",
+			plugin_dir_url(__FILE__) . 'js/jquery-ui/jquery.ui.slider-rtl.min.js',
+			array('jquery'),
+			$this->version,
+			false
+		);
 
 	}
 

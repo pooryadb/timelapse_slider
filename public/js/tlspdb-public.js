@@ -1,32 +1,45 @@
-(function( $ ) {
-	'use strict';
+(function ($) {
+    'use strict';
+    $(document).ready(function () {
 
-	/**
-	 * All of the code for your public-facing JavaScript source
-	 * should reside in this file.
-	 *
-	 * Note: It has been assumed you will write jQuery code here, so the
-	 * $ function reference has been prepared for usage within the scope
-	 * of this function.
-	 *
-	 * This enables you to define handlers, for when the DOM is ready:
-	 *
-	 * $(function() {
-	 *
-	 * });
-	 *
-	 * When the window is loaded:
-	 *
-	 * $( window ).load(function() {
-	 *
-	 * });
-	 *
-	 * ...and/or other possibilities.
-	 *
-	 * Ideally, it is not considered best practise to attach more than a
-	 * single DOM-ready or window-load handler for a particular page.
-	 * Although scripts in the WordPress core, Plugins and Themes may be
-	 * practising this, we should strive to set a better example in our own work.
-	 */
+        var tlsParent = $(".tls-parent"),
+            owl = tlsParent.find(".owl-carousel"),
+            slider = tlsParent.find(".ui-slider"),
+            items = tlsParent.find(".tls-images-item");
 
-})( jQuery );
+        owl.owlCarousel({
+            items: 1,
+            center: false,
+            mouseDrag: false,
+            touchDrag: false,
+            lazyLoad: true,
+            lazyLoadEager: 3,
+            rtl: true,
+            animateOut: 'fadeOut',
+            animateIn: 'fadeIn',
+			singleItem: true,
+        });
+
+        slider.slider({
+            max: items.length - 1,
+            isRTL: true
+        });
+
+        owl.on('changed.owl.carousel', function (event) {
+            console.log("owl change", event.item.index);
+            slider.slider("option", "value", event.item.index);
+        });
+
+        slider.on("slide", function (event, ui) {
+            console.log("slider", ui.value);
+			owl.trigger('to.owl.carousel', [ui.value]);
+
+        });
+
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+
+    });
+
+})(jQuery);
