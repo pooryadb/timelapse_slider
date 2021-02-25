@@ -5,7 +5,8 @@
         var tlsParent = $(".tls-parent"),
             owl = tlsParent.find(".owl-carousel"),
             slider = tlsParent.find(".ui-slider"),
-            items = tlsParent.find(".tls-images-item");
+            items = tlsParent.find(".tls-images-item"),
+            sliderHandle = tlsParent.find(".ui-slider-handle");
 
         owl.owlCarousel({
             items: 1,
@@ -17,7 +18,7 @@
             rtl: true,
             animateOut: 'fadeOut',
             animateIn: 'fadeIn',
-			singleItem: true,
+            singleItem: true,
         });
 
         slider.slider({
@@ -26,19 +27,25 @@
         });
 
         owl.on('changed.owl.carousel', function (event) {
-            console.log("owl change", event.item.index);
+            var title = tlsParent.find(".owl-item.active").find('.tls-images-item').attr('data-date-time');
+            sliderHandle.attr('title', title);
             slider.slider("option", "value", event.item.index);
         });
 
         slider.on("slide", function (event, ui) {
-            console.log("slider", ui.value);
-			owl.trigger('to.owl.carousel', [ui.value]);
-
+            owl.trigger('to.owl.carousel', [ui.value]);
         });
 
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
-        })
+        sliderHandle.tooltip({
+            classes: {
+                // 'ui-tooltip':"",
+                // 'ui-tooltip-content':"",
+            },
+            position: {
+                my: "center bottom-20", // the "anchor point" in the tooltip element
+                at: "center top", // the position of that anchor point relative to selected element
+            }
+        });
 
     });
 

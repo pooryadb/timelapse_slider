@@ -108,3 +108,30 @@
         top: -10px !important;
     }
 }
+
+
+.ui-tooltip {
+    padding: 5px 20px !important;
+    background: #ffffff !important;
+    text-align: center !important;
+    box-shadow: none !important;
+}
+
+.ui-tooltip:after {
+    content: " ";
+    position: absolute;
+    left: 50%;
+    margin-left: -15px;
+    bottom: -15px;
+    border-top: 15px solid #ffffff;
+    border-right: 15px solid transparent;
+    border-left: 15px solid transparent;
+    border-bottom: none;
+}
+
+.ui-tooltip-content {
+    color: #1f2a44 !important;
+    font-family: "Cairo", sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 1.1em !important;
+}
