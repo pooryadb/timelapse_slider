@@ -63,7 +63,7 @@
     /*z-index: 1;*/
 }
 
-.tls-parent .tls-images-item .tls-img.zoomedIn {
+.tls-parent .tls-images-item .zoomedIn {
     cursor: -webkit-zoom-out;
     cursor: zoom-out;
     cursor: url(../images/zoom_out.png) 20 20, auto;

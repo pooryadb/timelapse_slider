@@ -150,6 +150,14 @@ class Tlspdb_Public {
 			false
 		);
 
+		wp_enqueue_script(
+			$this->plugin_name . "-jquery.zoom",
+			plugin_dir_url(__FILE__) . 'js/jquery.zoom.min.js',
+			array('jquery'),
+			$this->version,
+			false
+		);
+
 	}
 
 }

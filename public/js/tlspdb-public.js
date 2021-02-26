@@ -47,6 +47,16 @@
             }
         });
 
+        items.zoom({
+            on: 'click',
+            onZoomIn: function () {
+                $(this).addClass('zoomedIn')
+            },
+            onZoomOut: function () {
+                $(this).removeClass('zoomedIn')
+            },
+        });
+
     });
 
 })(jQuery);
