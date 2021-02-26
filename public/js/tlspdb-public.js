@@ -26,8 +26,9 @@
             isRTL: true
         });
 
+        var owlItems = tlsParent.find(".owl-item");
         owl.on('changed.owl.carousel', function (event) {
-            var title = tlsParent.find(".owl-item.active").find('.tls-images-item').attr('data-date-time');
+            var title = owlItems.eq(event.item.index).find('.tls-images-item').attr('data-date-time');
             sliderHandle.attr('title', title);
             slider.slider("option", "value", event.item.index);
         });
