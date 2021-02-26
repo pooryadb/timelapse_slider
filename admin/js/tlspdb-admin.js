@@ -17,6 +17,10 @@
             var attachments = custom_uploader.state().get('selection').toJSON(),
                 tableBody = $('.tls-table tbody');
 
+            attachments = attachments.sort(function (a, b) {
+                return a.filename.localeCompare(b.filename);
+            });
+
             tableBody.html("");
             attachments.forEach(function (value) {
                 tableBody.append(
