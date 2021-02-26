@@ -60,7 +60,7 @@ class Tlspdb_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_styles() {
+	public function enqueue_styles($hook) {
 
 		/**
 		 * This function is provided for demonstration purposes only.
@@ -76,6 +76,20 @@ class Tlspdb_Admin {
 
 		wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/tlspdb-admin.css', array(), $this->version, 'all');
 
+		if (!isset($GLOBALS['text_direction'])) {
+			wp_register_style(
+				$this->plugin_name . '_admin_bootstrap_css',
+				plugin_dir_url(__FILE__) . 'css/bootstrap/bootstrap-rtl.min.css'
+			);
+		} else {
+			if ('rtl' == _x('ltr', 'text direction')) {
+				wp_register_style(
+					$this->plugin_name . '_admin_bootstrap_css',
+					plugin_dir_url(__FILE__) . 'css/bootstrap/bootstrap.min.css'
+				);
+			}
+		}
+		wp_enqueue_style($this->plugin_name . '_admin_bootstrap_css');
 	}
 
 	/**
@@ -103,6 +117,21 @@ class Tlspdb_Admin {
 
 		wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/tlspdb-admin.js', array('jquery'), $this->version, false);
 
+		wp_enqueue_script(
+			$this->plugin_name . '_admin_bootstrap_js',
+			plugin_dir_url(__FILE__) . 'js/bootstrap.js',
+			array('bootstrap'),
+			$this->version,
+			false
+		);
+
+		wp_enqueue_script(
+			$this->plugin_name . "-admin-jquery.zoom",
+			plugin_dir_url(dirname(__FILE__)) .'public/js/jquery.zoom.min.js',
+			array('jquery'),
+			$this->version,
+			false
+		);
 	}
 
 	/**
@@ -174,34 +203,15 @@ class Tlspdb_Admin {
 		add_meta_box(
 			tlspdb_constants::box_select_images_id,
 			__('Select Images', 'tlspdb'),
-			'slect_images_box_content',
+			'select_images_box_content',
 			tlspdb_constants::timelapse_post_type,
 			'normal',
 			'core'
 		);
 
-		function slect_images_box_content($post) {
-			$image_ids = get_post_meta($post->ID, tlspdb_constants::timelapse_box_image_ids_option, true);
-			$image_ids = explode(',', $image_ids);
-
-			wp_nonce_field('somerandomstr', tlspdb_constants::timelapse_box_nounce);
-
-			if (sizeof($image_ids) > 0) {
-				$image_0 = wp_get_attachment_image_src($image_ids[0], 'thumbnail', true);
-				$image_1 = wp_get_attachment_image_src($image_ids[sizeof($image_ids) - 1], 'thumbnail', true);
-				echo '
-<a href="#" class="upload-tlspdb">
-	<img src="' . $image_0[0] . '" /> ... ... > <img src="' . $image_1[0] . '" /> click to replace
-</a>
-	      <input type="hidden" name="img-tlspdb" value="' . implode(',', $image_ids) . '">';
-
-			} else {
-
-				echo '<a href="#" class="upload-tlspdb">Select/Upload image</a>
-	      <input type="hidden" name="img-tlspdb" value="">';
-
-			}
-		}// product_price_box_content()
+		function select_images_box_content($post) {
+			require plugin_dir_path(dirname(__FILE__)) . 'admin/partials/tlspdb-admin-select_images_box_content.php';
+		}
 
 	}
 

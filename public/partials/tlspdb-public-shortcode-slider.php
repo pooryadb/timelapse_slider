@@ -30,7 +30,7 @@ error_log("post id: ${attr['id']}, image ids: " . var_export($image_ids, true));
 			$img   = wp_get_attachment_image_src($id, 'full');
 			?>
             <div class="tls-images-item" data-date-time="$<?php echo $title; ?>">
-                <img role="presentation" alt="" data-src="<?php echo $img[0]; ?>" class="tls-img owl-lazy animate__animated animate__fadeIn">
+                <img role="presentation" alt="" data-src="<?php echo $img[0]; ?>" class="tls-img owl-lazy">
             </div>
 		<?php } ?>
     </div>
