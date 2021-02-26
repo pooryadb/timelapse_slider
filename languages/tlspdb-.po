@@ -1,0 +1,159 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2021-02-26 16:51+0330\n"
+"PO-Revision-Date: 2021-02-26 16:58+0330\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fa_IR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.1\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: admin/class-tlspdb-admin.php:148
+msgid "Add New TimeLapse"
+msgstr "اضافه کردن TimeLapse"
+
+#: admin/class-tlspdb-admin.php:149
+msgid "Edit TimeLapse"
+msgstr "تغییر TimeLapse"
+
+#: admin/class-tlspdb-admin.php:150
+msgid "New TimeLapse"
+msgstr "ایجاد TimeLapse"
+
+#: admin/class-tlspdb-admin.php:151
+msgid "All TimeLapse"
+msgstr "همه TimeLapse"
+
+#: admin/class-tlspdb-admin.php:152
+msgid "View TimeLapse"
+msgstr "مشاهده TimeLapse"
+
+#: admin/class-tlspdb-admin.php:153
+msgid "Search TimeLapse"
+msgstr "جست و جو TimeLapse"
+
+#: admin/class-tlspdb-admin.php:154
+msgid "No TimeLapse found"
+msgstr "هیچ TimeLapse پیدا نشد"
+
+#: admin/class-tlspdb-admin.php:155
+msgid "No TimeLapse found in the Trash"
+msgstr "هیچ TimeLapse در سطل زباله پیدا نشد"
+
+#: admin/class-tlspdb-admin.php:160
+msgid "Holds our TimeLapse slider data"
+msgstr "داده های اسلایدر TimeLapse ما را نگه می دارد"
+
+#: admin/class-tlspdb-admin.php:175
+#, php-format
+msgid "TimeLapse updated. <a href=\"%s\">View TimeLapse</a>"
+msgstr "TimeLapse آپدیت شد. <a href=\"%s\">مشاهده TimeLapse</a>"
+
+#: admin/class-tlspdb-admin.php:176
+msgid "Custom field updated."
+msgstr "فیلد آپدیت شد"
+
+#: admin/class-tlspdb-admin.php:177
+msgid "Custom field deleted."
+msgstr "فیلد حذف شد"
+
+#: admin/class-tlspdb-admin.php:178
+msgid "TimeLapse updated."
+msgstr "TimeLapse آپدیت شد"
+
+#: admin/class-tlspdb-admin.php:180
+#, php-format
+msgid "TimeLapse restored to revision from %s"
+msgstr "TimeLapse  از نسخه %s بازیابی شد"
+
+#: admin/class-tlspdb-admin.php:183
+#, php-format
+msgid "TimeLapse published. <a href=\"%s\">View TimeLapse</a>"
+msgstr "TimeLapse منتشر شد. <a href=\"%s\">مشاهده TimeLapse</a>"
+
+#: admin/class-tlspdb-admin.php:184
+msgid "TimeLapse saved."
+msgstr "TimeLapse  ذخیره شد"
+
+#: admin/class-tlspdb-admin.php:186
+#, php-format
+msgid ""
+"TimeLapse submitted. <a target=\"_blank\" href=\"%s\">Preview TimeLapse</a>"
+msgstr ""
+"TimeLapse ارسال شد. <a target=\"_blank\" href=\"%s\">نمایش TimeLapse</a>"
+
+#: admin/class-tlspdb-admin.php:190
+#, php-format
+msgid ""
+"TimeLapse scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href="
+"\"%2$s\">Preview TimeLapse</a>"
+msgstr ""
+"TimeLapse زمان بندی شد برای  : <strong>%1$s</strong>. <a target=\"_blank\" "
+"href=\"%2$s\">نمایش TimeLapse</a>"
+
+#: admin/class-tlspdb-admin.php:191
+msgid "M j, Y @ G:i"
+msgstr ""
+
+#: admin/class-tlspdb-admin.php:195
+#, php-format
+msgid ""
+"TimeLapse draft updated. <a target=\"_blank\" href=\"%s\">Preview TimeLapse</"
+"a>"
+msgstr ""
+"TimeLapse پیش-ذخیره آپدیت شد. <a target=\"_blank\" href=\"%s\">نمایش "
+"TimeLapse</a>"
+
+#: admin/class-tlspdb-admin.php:205
+msgid "Select Images"
+msgstr "انتخاب عکس ها"
+
+#: admin/class-tlspdb-admin.php:247
+msgid "Slider ShortCode"
+msgstr "شٌرت-کٌد اسلایدر"
+
+#: admin/class-tlspdb-admin.php:255
+msgid ""
+"To use this TimeLapseSlider copy & paste below shortCode where ever you need"
+msgstr ""
+"برای استفاده از این TimeLapseSlider ، شٌرت-کٌد زیر را در هر جایی که نیاز است "
+"کپی کنید"
+
+#: admin/partials/tlspdb-admin-select_images_box_content.php:24
+msgid "Select/Upload image"
+msgstr "انتخاب/آپدیت عکس "
+
+#: admin/partials/tlspdb-admin-select_images_box_content.php:27
+msgid "image"
+msgstr "عکس"
+
+#: admin/partials/tlspdb-admin-select_images_box_content.php:28
+msgid "file name"
+msgstr "نام فایل"
+
+#: admin/partials/tlspdb-admin-select_images_box_content.php:29
+msgid "title (used as date-tooltip)"
+msgstr "عنوان ( برای تاریخ در tooltip استفاده میشود)"
+
+#: admin/partials/tlspdb-admin-select_images_box_content.php:36
+msgid "Empty list"
+msgstr "لیست خالی است"
+
+#: includes/tlspdb-shortcodes.php:14
+msgid "Please insert TimeLapseSlide \"id\" to shortCode usage"
+msgstr "لطفا \"id\" TimeLapseSlide  را در شٌرت-کٌد استفاده کنید"
+
+#: includes/tlspdb-shortcodes.php:19
+msgid "Error, file not found!"
+msgstr "خطا، فایل پیدا نشد!"
+
+#: timelapse_slider_pdb.php:39
+msgid "Time Lapse"
+msgstr "Time Lapse"
