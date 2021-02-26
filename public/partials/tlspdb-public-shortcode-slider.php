@@ -29,7 +29,7 @@ error_log("post id: ${attr['id']}, image ids: " . var_export($image_ids, true));
 			$title = get_post($id)->post_title;
 			$img   = wp_get_attachment_image_src($id, 'full');
 			?>
-            <div class="tls-images-item" data-date-time="$<?php echo $title; ?>">
+            <div class="tls-images-item" data-date-time="<?php echo $title; ?>">
                 <img role="presentation" alt="" data-src="<?php echo $img[0]; ?>" class="tls-img owl-lazy">
             </div>
 		<?php } ?>

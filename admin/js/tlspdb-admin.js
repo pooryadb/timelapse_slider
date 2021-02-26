@@ -21,7 +21,7 @@
             attachments.forEach(function (value) {
                 tableBody.append(
                     '<tr>' +
-                    '<td class="tls-image-td"><img class="tls-thumbnail" alt="" width="80px" height="auto" data-src-retina="' + value.sizes.full.url + '" src="' + value.sizes.thumbnail.url + '"/></td>' +
+                    '<td class="tls-image-td"><img class="tls-thumbnail" alt="" data-src-retina="' + value.sizes.full.url + '" src="' + value.sizes.thumbnail.url + '"/></td>' +
                     '<td>' + value.filename + '</td>' +
                     '<td>' + value.title + '</td>' +
                     '</tr>'
