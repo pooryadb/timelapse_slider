@@ -53,7 +53,7 @@ $image_ids_size = sizeof($image_ids);
     <div class="tls-slider-parent">
         <div class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content">
             <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"
-                  ></span>
+                  title="<?php echo get_post($image_ids[0])->post_title; ?>"></span>
         </div>
     </div>
 </div>
