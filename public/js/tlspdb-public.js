@@ -25,11 +25,12 @@
             max: items.length - 1,
             isRTL: true
         });
+        slider.draggable();
 
         var owlItems = tlsParent.find(".owl-item");
         owl.on('changed.owl.carousel', function (event) {
             var title = owlItems.eq(event.item.index).find('.tls-images-item').attr('data-date-time');
-            sliderHandle.attr('title', title);
+            // sliderHandle.attr('title', title);
             slider.slider("option", "value", event.item.index);
         });
 
@@ -48,14 +49,19 @@
             }
         });
 
-        items.zoom({
-            on: 'click',
-            onZoomIn: function () {
-                $(this).addClass('zoomedIn')
-            },
-            onZoomOut: function () {
-                $(this).removeClass('zoomedIn')
-            },
+        //zoom      ---------------------
+        items.each(function (index, el) {
+            var srcFull = $(el).find(".tls-img").attr('data-src-full');
+            $(el).zoom({
+                url: srcFull,
+                on: 'click',
+                onZoomIn: function () {
+                    $(this).addClass('zoomedIn')
+                },
+                onZoomOut: function () {
+                    $(this).removeClass('zoomedIn')
+                },
+            });
         });
 
     });

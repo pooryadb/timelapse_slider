@@ -74,22 +74,26 @@ class Tlspdb_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/tlspdb-admin.css', array(), $this->version, 'all');
+		wp_register_style(
+			$this->plugin_name,
+			plugin_dir_url(__FILE__) . 'css/tlspdb-admin.css',
+			array(),
+			$this->version,
+			'all'
+		);
 
-		if (!isset($GLOBALS['text_direction'])) {
+		if (is_rtl()) {
 			wp_register_style(
 				$this->plugin_name . '_admin_bootstrap_css',
 				plugin_dir_url(__FILE__) . 'css/bootstrap/bootstrap-rtl.min.css'
 			);
 		} else {
-			if ('rtl' == _x('ltr', 'text direction')) {
-				wp_register_style(
-					$this->plugin_name . '_admin_bootstrap_css',
-					plugin_dir_url(__FILE__) . 'css/bootstrap/bootstrap.min.css'
-				);
-			}
+			wp_register_style(
+				$this->plugin_name . '_admin_bootstrap_css',
+				plugin_dir_url(__FILE__) . 'css/bootstrap/bootstrap.min.css'
+			);
 		}
-		wp_enqueue_style($this->plugin_name . '_admin_bootstrap_css');
+
 	}
 
 	/**
@@ -111,13 +115,15 @@ class Tlspdb_Admin {
 		 * class.
 		 */
 
-		if (!did_action('wp_enqueue_media')) {
-			wp_enqueue_media();
-		}
+		wp_register_script(
+			$this->plugin_name,
+			plugin_dir_url(__FILE__) . 'js/tlspdb-admin.js',
+			array('jquery'),
+			$this->version,
+			false
+		);
 
-		wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/tlspdb-admin.js', array('jquery'), $this->version, false);
-
-		wp_enqueue_script(
+		wp_register_script(
 			$this->plugin_name . '_admin_bootstrap_js',
 			plugin_dir_url(__FILE__) . 'js/bootstrap.js',
 			array('bootstrap'),
@@ -125,9 +131,9 @@ class Tlspdb_Admin {
 			false
 		);
 
-		wp_enqueue_script(
+		wp_register_script(
 			$this->plugin_name . "-admin-jquery.zoom",
-			plugin_dir_url(dirname(__FILE__)) .'public/js/jquery.zoom.min.js',
+			plugin_dir_url(dirname(__FILE__)) . 'public/js/jquery.zoom.min.js',
 			array('jquery'),
 			$this->version,
 			false

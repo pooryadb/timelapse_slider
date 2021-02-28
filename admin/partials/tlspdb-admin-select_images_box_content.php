@@ -13,6 +13,17 @@
  */
 // $post
 
+wp_enqueue_style(TLSPDB_PLUGIN_SLUG);
+wp_enqueue_style(TLSPDB_PLUGIN_SLUG . '_admin_bootstrap_css');
+
+if (!did_action('wp_enqueue_media')) {
+	wp_enqueue_media();
+}
+wp_enqueue_script(TLSPDB_PLUGIN_SLUG);
+wp_enqueue_script(TLSPDB_PLUGIN_SLUG . '_admin_bootstrap_js');
+wp_enqueue_script(TLSPDB_PLUGIN_SLUG . "-admin-jquery.zoom");
+
+
 $image_ids = get_post_meta($post->ID, tlspdb_constants::timelapse_box_image_ids_option, true);
 $image_ids = explode(',', $image_ids);
 

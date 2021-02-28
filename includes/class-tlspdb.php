@@ -70,9 +70,9 @@ class Tlspdb {
 		if (defined('TLSPDB_VERSION')) {
 			$this->version = TLSPDB_VERSION;
 		} else {
-			$this->version = '1.0.0';
+			$this->version = '1.0.3';
 		}
-		$this->plugin_name = 'tlspdb';
+		$this->plugin_name = TLSPDB_PLUGIN_SLUG;
 
 		$this->load_dependencies();
 		$this->set_locale();

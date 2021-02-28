@@ -74,8 +74,14 @@ class Tlspdb_Public {
 		 * class.
 		 */
 
-		wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/tlspdb-public.css', array(), $this->version, 'all');
-		wp_enqueue_style(
+		wp_register_style(
+			$this->plugin_name,
+			plugin_dir_url(__FILE__) . 'css/tlspdb-public.css',
+			array(),
+			$this->version,
+			'all'
+		);
+		wp_register_style(
 			$this->plugin_name . "-owl.carousel",
 			plugin_dir_url(__FILE__) . 'css/owlCarousel/owl.carousel.css',
 			array(),
@@ -83,14 +89,14 @@ class Tlspdb_Public {
 			'all'
 		);
 
-		wp_enqueue_style(
+		wp_register_style(
 			$this->plugin_name . "-jquery-ui.theme",
 			plugin_dir_url(__FILE__) . 'css/jquery-ui/jquery-ui.theme.css',
 			array(),
 			$this->version,
 			'all'
 		);
-		wp_enqueue_style(
+		wp_register_style(
 			$this->plugin_name . "-jquery.ui.slider-rtl",
 			plugin_dir_url(__FILE__) . 'css/jquery-ui/jquery.ui.slider-rtl.css',
 			array(),
@@ -119,15 +125,21 @@ class Tlspdb_Public {
 		 * class.
 		 */
 
-		wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/tlspdb-public.js', array('jquery'), $this->version, false);
-		wp_enqueue_script(
+		wp_register_script(
+			$this->plugin_name,
+			plugin_dir_url(__FILE__) . 'js/tlspdb-public.js',
+			array('jquery'),
+			$this->version,
+			false
+		);
+		wp_register_script(
 			$this->plugin_name . "-owl.carousel",
 			plugin_dir_url(__FILE__) . 'js/owlCarousel/owl.carousel.js',
 			array('jquery'),
 			$this->version,
 			false
 		);
-		wp_enqueue_script(
+		wp_register_script(
 			$this->plugin_name . "-owl.lazyload",
 			plugin_dir_url(__FILE__) . 'js/owlCarousel/owl.lazyload.js',
 			array('jquery'),
@@ -135,22 +147,33 @@ class Tlspdb_Public {
 			false
 		);
 
-		wp_enqueue_script(
+		wp_register_script(
 			$this->plugin_name . "-jquery-ui",
 			plugin_dir_url(__FILE__) . 'js/jquery-ui/jquery-ui.js',
 			array('jquery'),
 			$this->version,
 			false
 		);
-		wp_enqueue_script(
-			$this->plugin_name . "-jquery.ui.slider-rtl",
-			plugin_dir_url(__FILE__) . 'js/jquery-ui/jquery.ui.slider-rtl.min.js',
+
+		wp_register_script(
+			$this->plugin_name . "-jquery.ui.touch-punch.min",
+			plugin_dir_url(__FILE__) . 'js/jquery-ui/jquery.ui.touch-punch.min.js',
 			array('jquery'),
 			$this->version,
 			false
 		);
 
-		wp_enqueue_script(
+		if (is_rtl()) {
+			wp_register_script(
+				$this->plugin_name . "-jquery.ui.slider-rtl",
+				plugin_dir_url(__FILE__) . 'js/jquery-ui/jquery.ui.slider-rtl.min.js',
+				array('jquery'),
+				$this->version,
+				false
+			);
+		}
+
+		wp_register_script(
 			$this->plugin_name . "-jquery.zoom",
 			plugin_dir_url(__FILE__) . 'js/jquery.zoom.min.js',
 			array('jquery'),

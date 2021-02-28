@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2021-02-26 16:51+0330\n"
-"PO-Revision-Date: 2021-02-26 16:58+0330\n"
+"POT-Creation-Date: 2021-02-26 17:51+0330\n"
+"PO-Revision-Date: 2021-02-26 17:51+0330\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fa_IR\n"
@@ -12,8 +12,20 @@ msgstr ""
 "X-Generator: Poedit 2.4.1\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
-"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-KeywordsList: __;_e;_x\n"
 "X-Poedit-SearchPath-0: .\n"
+
+#: admin/class-tlspdb-admin.php:85
+msgid "ltr"
+msgstr "چپ به راست"
+
+#: admin/class-tlspdb-admin.php:145 admin/class-tlspdb-admin.php:146
+msgid "TimeLapse"
+msgstr "Time Lapse"
+
+#: admin/class-tlspdb-admin.php:147
+msgid "Add New"
+msgstr "افزودن جدید"
 
 #: admin/class-tlspdb-admin.php:148
 msgid "Add New TimeLapse"
