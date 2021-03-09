@@ -1,6 +1,12 @@
 (function ($) {
     'use strict';
+
     $(window).load(function () {
+
+        var selectSortImageEl = $('#tlspdb-sort-image');
+        selectSortImageEl.on('change', function () {
+            reverseTable(this.value);
+        });
 
         var custom_uploader = wp.media({
             title: 'Insert image',
@@ -14,24 +20,9 @@
             },
             multiple: true
         }).on('select', function () { // it also has "open" and "close" events
-            var attachments = custom_uploader.state().get('selection').toJSON(),
-                tableBody = $('.tls-table tbody');
+            var attachments = custom_uploader.state().get('selection').toJSON();
 
-            attachments = attachments.sort(function (a, b) {
-                return a.filename.localeCompare(b.filename);
-            });
-
-            tableBody.html("");
-            attachments.forEach(function (value) {
-                tableBody.append(
-                    '<tr>' +
-                    '<td class="tls-image-td"><img class="tls-thumbnail" alt="" data-src-retina="' + value.sizes.full.url + '" src="' + value.sizes.thumbnail.url + '"/></td>' +
-                    '<td>' + value.filename + '</td>' +
-                    '<td>' + value.title + '</td>' +
-                    '</tr>'
-                );
-            });
-            $('input[name=img-tlspdb]').val(attachments.map(value => value.id));
+            updateTable(attachments, selectSortImageEl.val());
 
             setupZoom();
 
@@ -73,5 +64,43 @@
                 url: urlRetina,
             });
         })
+    }
+
+    function updateTable(attachments, selectSortVal) {
+        var tableBody = $('.tls-table tbody');
+
+        attachments = attachments.sort(function (a, b) {
+            if (selectSortVal == 'asc') {
+                return a.filename.localeCompare(b.filename);
+            } else {
+                return b.filename.localeCompare(a.filename);
+            }
+        });
+
+        tableBody.html("");
+        attachments.forEach(function (value) {
+            tableBody.append(
+                '<tr>' +
+                '<td class="tls-image-td"><img class="tls-thumbnail" alt="" data-src-retina="' + value.sizes.full.url + '" src="' + value.sizes.thumbnail.url + '"/></td>' +
+                '<td>' + value.filename + '</td>' +
+                '<td>' + value.title + '</td>' +
+                '</tr>'
+            );
+        });
+
+        $('input[name=img-tlspdb]').val(attachments.map(value => value.id));
+    }
+
+    function reverseTable(sortBy) {
+        var tableBody = $('.tls-table tbody'),
+            inputHidden = $('input[name=img-tlspdb]');
+
+        tableBody.each(function (elem, index) {
+            var arr = $.makeArray($("tr", this).detach());
+            arr.reverse();
+            $(this).append(arr);
+        });
+
+        inputHidden.val(inputHidden.val().split(',').reverse().join(','));
     }
 })(jQuery);

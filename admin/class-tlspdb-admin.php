@@ -243,6 +243,9 @@ class Tlspdb_Admin {
 			}
 		}
 
+		$sortBy = isset($_POST['img-sort-tlspdb']) ? $_POST['img-sort-tlspdb'] : 'asc';
+		update_post_meta($post_id, tlspdb_constants::timelapse_box_image_sort_option, $sortBy);
+
 		$imgIds = isset($_POST['img-tlspdb']) ? $_POST['img-tlspdb'] : '';
 		update_post_meta($post_id, tlspdb_constants::timelapse_box_image_ids_option, $imgIds);
 	}

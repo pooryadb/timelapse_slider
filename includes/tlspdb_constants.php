@@ -6,6 +6,7 @@ abstract class tlspdb_constants {
 
 	const timelapse_box_nounce = 'tls_nounce';
 	const timelapse_box_image_ids_option = 'tls_image_ids';
+	const timelapse_box_image_sort_option = 'tls_image_sort';
 
 	const slider_shortCode_name = 'tls-slider';
 

@@ -32,7 +32,20 @@ wp_nonce_field('somerandomstr', tlspdb_constants::timelapse_box_nounce);
 ?>
 
 <table class="tls-table table table-bordered">
-    <a href="#" class="upload-tlspdb btn btn-primary"><?php _e('Select/Upload image', 'tlspdb'); ?></a>
+    <div class="form-inline">
+        <div class="upload-tlspdb btn btn-primary"><?php _e('Select/Upload image', 'tlspdb'); ?></div>
+        <hr>
+        <label for="tlspdb-sort-image"><?php _e('Sort by:', 'tlspdb'); ?></label>
+        <select class="custom-select" id="tlspdb-sort-image" name="img-sort-tlspdb">
+            <option value="asc"
+                <?php selected(get_post_meta($post->ID, tlspdb_constants::timelapse_box_image_sort_option, true), 'asc'); ?>>
+                <?php _e('ascending', 'tlspdb'); ?></option>
+            <option value="dsc"
+                <?php selected(get_post_meta($post->ID, tlspdb_constants::timelapse_box_image_sort_option, true), 'dsc'); ?> >
+                <?php _e('descending', 'tlspdb'); ?></option>
+        </select>
+    </div>
+
     <thead>
     <tr>
         <th><?php _e('image', 'tlspdb'); ?></th>
@@ -48,7 +61,7 @@ wp_nonce_field('somerandomstr', tlspdb_constants::timelapse_box_nounce);
 		echo '</tr></td>';
 	} else {
 		foreach ($image_ids as $id) {
-			$imageUrl    = wp_get_attachment_image_src($id, 'thumbnail', true);
+			$imageUrl = wp_get_attachment_image_src($id, 'thumbnail', true);
 			$imageBigUrl = wp_get_attachment_image_src($id, 'full', true);
 
 			$imagePost = get_post($id);
