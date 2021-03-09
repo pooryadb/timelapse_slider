@@ -112,6 +112,10 @@
 
 
 .ui-tooltip {
+    position: absolute !important;
+    left: -50%;
+    top: -80px;
+    width: auto !important;
     padding: 5px 20px !important;
     background: #ffffff !important;
     text-align: center !important;

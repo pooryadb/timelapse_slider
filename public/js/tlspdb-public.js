@@ -20,33 +20,67 @@
             animateIn: 'fadeIn',
             singleItem: true,
         });
+        var owlItems = tlsParent.find(".owl-item");
 
+        var tooltip = $('<div id="tooltip" class="ui-tooltip"><div class="ui-tooltip-content" /> </div>').hide();
+
+        var canHide = false,
+            isShown = false;
         slider.slider({
             max: items.length - 1,
-            isRTL: true
-        });
+            isRTL: true,
+            slide: function (event, ui) {
+                var title = owlItems.eq(ui.value).find('.tls-images-item').attr('data-date-time');
+                sliderHandle.find(".ui-tooltip-content").html(title);
+
+                $(tooltip).css({
+                    left: $(tooltip).width() / -2
+                });
+
+                owl.trigger('to.owl.carousel', [ui.value]);
+            }
+        }).find(".ui-slider-handle")
+            .append(tooltip)
+            .hover(function () {
+                if (!$(this).find('div').is(':visible')) {
+                    isShown = true;
+                    canHide = true;
+                    $(this).find('div').show("fade");
+                }
+            }, function () {
+                if (canHide && isShown) {
+                    isShown = false;
+                    $(this).find('div').hide("fade");
+                }
+            })
+            .on({
+                mouseup: function () {
+                    canHide = true;
+                    isShown = false;
+                    $(this).find('div').hide("fade");
+                },
+                mousedown: function () {
+                    canHide = false;
+                    isShown = true;
+                    $(this).find('div').show("fade");
+                },
+            });
         slider.draggable();
 
-        var owlItems = tlsParent.find(".owl-item");
+        $(".ui-slider-handle").find('div').hide();
+
+        $(window).click(function () {
+            slider.find('div').hide("fade");
+        });
+
+        var title = owlItems.eq(0).find('.tls-images-item').attr('data-date-time');
+        sliderHandle.find(".ui-tooltip-content").html(title);
+        /*$(tooltip).css({
+            left: $(tooltip).width() / -2
+        });*/
+
         owl.on('changed.owl.carousel', function (event) {
-            var title = owlItems.eq(event.item.index).find('.tls-images-item').attr('data-date-time');
-            sliderHandle.attr('title', title);
             slider.slider("option", "value", event.item.index);
-        });
-
-        slider.on("slide", function (event, ui) {
-            owl.trigger('to.owl.carousel', [ui.value]);
-        });
-
-        sliderHandle.tooltip({
-            classes: {
-                // 'ui-tooltip':"",
-                // 'ui-tooltip-content':"",
-            },
-            position: {
-                my: "center bottom-20", // the "anchor point" in the tooltip element
-                at: "center top", // the position of that anchor point relative to selected element
-            }
         });
 
         //zoom      ---------------------
