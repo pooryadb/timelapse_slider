@@ -1,4 +1,4 @@
-### TimeLapse Slider
+# TimeLapse Slider
 
 With this plugin, admin can select bunch of images (time-lapse) and show them as carousel in website with the help of short-codes.
 
@@ -14,9 +14,9 @@ supports:
 
 ## Screenshots
 
-1. ![Screenshot-0](https://github.com/pooryadb/timelapse_slider/blob/master/assets/Screenshot-0.jpg)
+![Screenshot-0](https://github.com/pooryadb/timelapse_slider/blob/master/assets/Screenshot-0.jpg)
 
-2. ![Screenshot-1](https://github.com/pooryadb/timelapse_slider/blob/master/assets/Screenshot-1.gif)
+![Screenshot-1](https://github.com/pooryadb/timelapse_slider/blob/master/assets/Screenshot-1.gif)
 
 -------------------------------------------------------------------------------
 
