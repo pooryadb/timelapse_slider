@@ -163,16 +163,6 @@ class Tlspdb_Public {
 			false
 		);
 
-		if (is_rtl()) {
-			wp_register_script(
-				$this->plugin_name . "-jquery.ui.slider-rtl",
-				plugin_dir_url(__FILE__) . 'js/jquery-ui/jquery.ui.slider-rtl.min.js',
-				array('jquery'),
-				$this->version,
-				false
-			);
-		}
-
 		wp_register_script(
 			$this->plugin_name . "-jquery.zoom",
 			plugin_dir_url(__FILE__) . 'js/jquery.zoom.min.js',

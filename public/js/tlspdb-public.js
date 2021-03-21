@@ -28,7 +28,6 @@
             isShown = false;
         slider.slider({
             max: items.length - 1,
-            isRTL: true,
             slide: function (event, ui) {
                 var title = owlItems.eq(ui.value).find('.tls-images-item').attr('data-date-time');
                 sliderHandle.find(".ui-tooltip-content").html(title);

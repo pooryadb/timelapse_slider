@@ -15,8 +15,8 @@
  * @wordpress-plugin
  * Plugin Name:       Time-lapse slider
  * Plugin URI:        Shows bunch of pictures like time lapse in slider style
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
- * Version:           1.0.7
+ * Description:       Shows bunch of pictures like time lapse in slider style
+ * Version:           1.0.8
  * Author:            poorya dehghan berenji
  * Author URI:        http://romroid.ir
  * License:           GPL-2.0+
