@@ -15,8 +15,8 @@
  * @wordpress-plugin
  * Plugin Name:       Time-lapse slider
  * Plugin URI:        Shows bunch of pictures like time lapse in slider style
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
- * Version:           1.0.7
+ * Description:       With this plugin, admin can select bunch of images (time-lapse) and show them as carousel in website with the help of short-codes.
+ * Version:           1.0.8
  * Author:            poorya dehghan berenji
  * Author URI:        http://romroid.ir
  * License:           GPL-2.0+
@@ -35,7 +35,7 @@ if (!defined('WPINC')) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define('TLSPDB_VERSION', '1.0.7');
+define('TLSPDB_VERSION', '1.0.8');
 define('TLSPDB_PLUGIN_SLUG', 'tlspdb');
 define('TLSPDB_PLUGIN_NAME', __('Time Lapse', 'tlspdb'));
 
